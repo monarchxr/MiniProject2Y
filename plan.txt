@@ -1,0 +1,7 @@
+1. Check how to link the account for use
+
+2. Learn how to scrape, and scrape the comments
+
+3. Not sure how the storage part will work
+
+4. Sentiment analysis we'll try to do with either openai OR our own trained model if I can learn ML
