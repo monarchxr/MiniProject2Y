@@ -4,7 +4,7 @@ from instaloader import Instaloader,ConnectionException
 
 #logging in
 
-L = instaloader.Instaloader
+L = instaloader.Instaloader()
 
 username = input("Enter username: ")
 password = getpass.getpass("Enter password: ")
@@ -14,8 +14,6 @@ try:
     L.login(username, password)
     print(f"Logged in successfully as {username}")
 
-    profile = instaloader.Profile.from_username(L.context, username)
-    print(f"Logged in profile : {profile.username}")
 
 except instaloader.exceptions.BadCredentialsException:
     print("Login failed: Invalid credentials")
@@ -23,8 +21,8 @@ except instaloader.exceptions.ConnectionException as conn_error:
     print(f"Login failed: {str(conn_error)}")
 
 
-#not sure if login works, ill test
-#will test next time
+#login is working now
+#will start on scraping
 
 
 #scraping
