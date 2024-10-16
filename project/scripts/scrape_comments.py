@@ -1,15 +1,16 @@
 import instaloader
 import pandas as pd
 
-def scrape_comments(username, post_url, max_comments=100):
+def scrape_comments(L, post_url, max_comments=100):
     
     L = instaloader.Instaloader()
     
     comments =[]
 
-    shortcode = str(post_url[28:39])
+    shortcode = post_url.split("/")[-1].strip()
+    post = instaloader.Post.from_shortcode(L.context, shortcode)
 
-    for comment in shortcode.get_comments():
+    for comment in post.get_comments():
         comments.append(comment.text)
         if(len(comments)>=max_comments):
             break
