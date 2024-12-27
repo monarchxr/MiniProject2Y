@@ -41,7 +41,3 @@ def train_sent_model():
     print("Model and vectorizer saved in models directory")
 
 train_sent_model()
-
-
-
-
