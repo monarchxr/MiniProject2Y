@@ -2,7 +2,7 @@ import instaloader
 import pandas as pd
 import time
 
-def scrape_comments(session_username, post_url, output_file, max_comments=200):
+def scrape_comments(session_username, post_url_shortcode, output_file, max_comments=100):
     
     L = instaloader.Instaloader()
 
@@ -18,10 +18,9 @@ def scrape_comments(session_username, post_url, output_file, max_comments=200):
 
     comments = []
     try:
-        shortcode = post_url[28:42].split("/")[-1].strip()
-        print(shortcode) 
-        post = instaloader.Post.from_shortcode(L.context, shortcode)
-        print(f"Fetching comments for post: {shortcode}")
+        print(post_url_shortcode) 
+        post = instaloader.Post.from_shortcode(L.context, post_url_shortcode)
+        print(f"Fetching comments for post: {post_url_shortcode}")
 
         for comment in post.get_comments():
             comments.append(comment.text)
@@ -36,13 +35,13 @@ def scrape_comments(session_username, post_url, output_file, max_comments=200):
 
     try:
         df = pd.DataFrame(comments, columns=["comment"])
-        df.to_csv(output_file,mode='a',header=False ,index=False)
+        df.to_csv(output_file,mode='w',header=False ,index=False)
         print(f"Scraped {len(comments)} comments and saved to {output_file}")
     except Exception as e:
         print(f"Error saving comments: {e}")
 
 if __name__ == "__main__":
     session_username = "_monarchxr_"
-    post_url = input("Enter Instagram post URL: ")
+    post_url_shortcode = input("Enter Instagram post URL shortcode: ")
     output_file = r"C:\Users\rauna\OneDrive\Desktop\MiniProject2Y\project\data\unlabeled.csv" 
-    scrape_comments(session_username, post_url, output_file)
+    scrape_comments(session_username, post_url_shortcode, output_file)
